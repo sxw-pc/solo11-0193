@@ -1,0 +1,68 @@
+[
+  {
+    "id": "R1",
+    "kind": "receipt",
+    "at": "2026-11-10T10:00:00",
+    "garden": "G1",
+    "variety": "Longjing",
+    "picker": "P1",
+    "pick_ticket": "T1",
+    "picked_at": "2026-11-10T08:00:00",
+    "delivered_at": "2026-11-10T10:00:00",
+    "gross_kg": 100,
+    "grade": "premium"
+  },
+  {
+    "id": "W1",
+    "kind": "weight",
+    "at": "2026-11-10T10:10:00",
+    "receipt": "R1",
+    "net_kg": 98,
+    "garden_sign": "farmer",
+    "factory_sign": "factory"
+  },
+  {
+    "id": "R2",
+    "kind": "receipt",
+    "at": "2026-11-10T18:00:00",
+    "garden": "G1",
+    "variety": "Longjing",
+    "picker": "P1",
+    "pick_ticket": "T2",
+    "picked_at": "2026-11-10T09:00:00",
+    "delivered_at": "2026-11-10T18:00:00",
+    "gross_kg": 80,
+    "grade": "premium"
+  },
+  {
+    "id": "W2",
+    "kind": "weight",
+    "at": "2026-11-10T18:10:00",
+    "receipt": "R2",
+    "net_kg": 78,
+    "garden_sign": "farmer",
+    "factory_sign": "factory"
+  },
+  {
+    "id": "R5",
+    "kind": "receipt",
+    "at": "2026-11-10T12:00:00",
+    "garden": "G2",
+    "variety": "Longjing",
+    "picker": "P2",
+    "pick_ticket": "T5",
+    "picked_at": "2026-11-10T08:00:00",
+    "delivered_at": "2026-11-10T12:00:00",
+    "gross_kg": 40,
+    "grade": "standard"
+  },
+  {
+    "id": "W5",
+    "kind": "weight",
+    "at": "2026-11-10T12:10:00",
+    "receipt": "R5",
+    "net_kg": 39,
+    "garden_sign": "farmer2",
+    "factory_sign": "factory"
+  }
+]

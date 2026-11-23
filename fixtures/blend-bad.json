@@ -1,0 +1,100 @@
+[
+  {
+    "id": "B2",
+    "kind": "blend",
+    "at": "2026-11-12T20:00:00",
+    "receipts": [
+      "R1",
+      "R4"
+    ],
+    "output_kg": 200
+  },
+  {
+    "id": "L2",
+    "kind": "label",
+    "at": "2026-11-12T20:01:00",
+    "blend": "B2",
+    "organic": true,
+    "grade": "premium",
+    "origin": "G1"
+  },
+  {
+    "id": "B3",
+    "kind": "blend",
+    "at": "2026-11-12T20:02:00",
+    "receipts": [
+      "R4"
+    ],
+    "output_kg": 47
+  },
+  {
+    "id": "RW3",
+    "kind": "rework",
+    "at": "2026-11-12T20:02:30",
+    "blend": "B3",
+    "receipts": ["R4"],
+    "output_kg": 47
+  },
+  {
+    "id": "L3",
+    "kind": "label",
+    "at": "2026-11-12T20:03:00",
+    "blend": "B3",
+    "organic": true,
+    "grade": "standard",
+    "origin": "G2"
+  },
+  {
+    "id": "L4",
+    "kind": "label",
+    "at": "2026-11-12T20:04:00",
+    "blend": "B3",
+    "organic": false,
+    "grade": "premium",
+    "origin": "G2"
+  },
+  {
+    "id": "B4",
+    "kind": "blend",
+    "at": "2026-11-12T20:05:00",
+    "receipts": [
+      "R3"
+    ],
+    "output_kg": 45
+  },
+  {
+    "id": "L5",
+    "kind": "label",
+    "at": "2026-11-12T20:06:00",
+    "blend": "B4",
+    "organic": false,
+    "grade": "standard",
+    "origin": "G1"
+  },
+  {
+    "id": "L6",
+    "kind": "label",
+    "at": "2026-11-12T20:07:00",
+    "blend": "B3",
+    "organic": false,
+    "grade": "standard",
+    "origin": "G1"
+  },
+  {
+    "id": "RW0",
+    "kind": "rework",
+    "at": "2026-11-13T09:00:00",
+    "blend": "B0",
+    "receipts": ["R1", "R5"],
+    "output_kg": 120
+  },
+  {
+    "id": "L7",
+    "kind": "label",
+    "at": "2026-11-13T09:10:00",
+    "blend": "B0",
+    "organic": false,
+    "grade": "standard",
+    "origin": "mixed"
+  }
+]

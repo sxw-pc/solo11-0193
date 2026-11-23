@@ -1,0 +1,44 @@
+[
+  {
+    "id": "C1",
+    "kind": "certificate",
+    "at": "2026-11-01T00:00:00",
+    "garden": "G1",
+    "variety": "Longjing",
+    "version": 1,
+    "start": "2026-11-01T00:00:00",
+    "finish": "2026-12-01T00:00:00",
+    "organic": true,
+    "status": "active"
+  },
+  {
+    "id": "C3",
+    "kind": "certificate",
+    "at": "2026-11-01T00:00:01",
+    "garden": "G2",
+    "variety": "Longjing",
+    "version": 1,
+    "start": "2026-11-01T00:00:00",
+    "finish": "2026-12-01T00:00:00",
+    "organic": false,
+    "status": "active"
+  },
+  {
+    "id": "P1",
+    "kind": "picker",
+    "at": "2026-11-01T00:01:00",
+    "garden": "G1",
+    "start": "2026-11-01T00:00:00",
+    "finish": "2026-12-01T00:00:00",
+    "status": "active"
+  },
+  {
+    "id": "P2",
+    "kind": "picker",
+    "at": "2026-11-01T00:01:01",
+    "garden": "G2",
+    "start": "2026-11-01T00:00:00",
+    "finish": "2026-12-01T00:00:00",
+    "status": "active"
+  }
+]

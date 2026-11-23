@@ -1,0 +1,38 @@
+[
+  {
+    "id": "B0",
+    "kind": "blend",
+    "at": "2026-11-10T20:00:00",
+    "receipts": [
+      "R1"
+    ],
+    "output_kg": 95
+  },
+  {
+    "id": "L0",
+    "kind": "label",
+    "at": "2026-11-10T20:10:00",
+    "blend": "B0",
+    "organic": true,
+    "grade": "premium",
+    "origin": "G1"
+  },
+  {
+    "id": "B1",
+    "kind": "blend",
+    "at": "2026-11-10T20:20:00",
+    "receipts": [
+      "R2"
+    ],
+    "output_kg": 75
+  },
+  {
+    "id": "L1",
+    "kind": "label",
+    "at": "2026-11-10T20:30:00",
+    "blend": "B1",
+    "organic": true,
+    "grade": "standard",
+    "origin": "G1"
+  }
+]

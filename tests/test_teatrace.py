@@ -5,8 +5,8 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-import teatrace
-from teatrace.store import connect,ingest,report,audit
+import teablend
+from teablend.store import connect,ingest,report,audit
 
 ROOT=Path(__file__).resolve().parents[1]
 def fixture(name):return json.loads((ROOT/'fixtures'/f'{name}.json').read_text(encoding='utf-8'))
@@ -18,15 +18,15 @@ class TeaTests(unittest.TestCase):
     def tearDown(self):self.db.close();self.temp.cleanup()
     def put(self,system,name):return ingest(self.db,system,fixture(name))
     def normal(self):
-        for system,name in [('garden','garden-ok'),('leaf','leaf-ok'),('blend','blend-ok')]:self.put(system,name)
+        for system,name in [('garden','garden-import-ok'),('leaf','leaf-import-ok'),('blend','blend-import-ok')]:self.put(system,name)
         return report(self.db)['decisions']
     def all(self):
         self.normal()
-        for system,name in [('garden','garden-bad'),('leaf','leaf-bad'),('blend','blend-bad')]:self.put(system,name)
+        for system,name in [('garden','garden-import-bad'),('leaf','leaf-import-bad'),('blend','blend-import-bad')]:self.put(system,name)
         return report(self.db)['decisions']
     def test_package_path_and_three_entity_pairs(self):
-        self.normal();print('MODULE',teatrace.__file__)
-        self.assertTrue(Path(teatrace.__file__).resolve().is_relative_to(ROOT))
+        self.normal();print('MODULE',teablend.__file__)
+        self.assertTrue(Path(teablend.__file__).resolve().is_relative_to(ROOT))
         for table in ('certificates','pickers','receipts','weights','blends','labels'):
             self.assertGreater(self.db.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0],0)
     def test_garden_certificate_and_picker_authorize_picking(self):
@@ -59,17 +59,17 @@ class TeaTests(unittest.TestCase):
     def test_origin_label_tracks_garden_provenance(self):
         d=self.all();self.assertEqual(d['label:L6']['status'],'origin_mislabel')
     def test_late_revocation_recalculates_unprocessed_leaf(self):
-        self.normal();self.put('leaf','leaf-bad')
+        self.normal();self.put('leaf','leaf-import-bad')
         self.assertEqual(report(self.db)['decisions']['receipt:R8']['status'],'eligible')
-        self.put('garden','garden-bad')
+        self.put('garden','garden-import-bad')
         self.assertEqual(report(self.db)['decisions']['receipt:R8']['status'],'certificate_revoked_pending')
         self.assertGreater(len(report(self.db)['history']),len(report(self.db)['decisions']))
     def test_blocked_source_cannot_be_blended(self):
         d=self.all();self.assertEqual(d['blend:B4']['status'],'source_blocked')
     def test_same_event_replay_and_collision_transaction(self):
-        self.put('garden','garden-ok');out=self.put('garden','garden-ok')
+        self.put('garden','garden-import-ok');out=self.put('garden','garden-import-ok')
         self.assertEqual(out['replayed'],4)
-        bad=copy.deepcopy(fixture('garden-ok')[0]);bad['organic']=False
+        bad=copy.deepcopy(fixture('garden-import-ok')[0]);bad['organic']=False
         with self.assertRaises(ValueError):ingest(self.db,'garden',[bad])
         self.assertEqual(self.db.execute('SELECT COUNT(*) FROM evidence').fetchone()[0],4)
     def test_replay_audit_detects_tampering(self):
@@ -78,7 +78,7 @@ class TeaTests(unittest.TestCase):
         self.assertFalse(audit(self.db)['ok'])
     def test_fresh_six_stage_cli_demo(self):
         db=Path(self.temp.name)/'demo.sqlite'
-        p=subprocess.run([sys.executable,'-m','teatrace','demo','--db',str(db)],cwd=ROOT,capture_output=True,text=True)
+        p=subprocess.run([sys.executable,'-m','teablend','demo','--db',str(db)],cwd=ROOT,capture_output=True,text=True)
         self.assertEqual(p.returncode,0,p.stderr)
         data=json.loads(p.stdout);self.assertEqual(len(data['steps']),6)
         self.assertTrue(data['audit']['ok'])
@@ -93,9 +93,9 @@ class TeaTests(unittest.TestCase):
         self.assertEqual(d['label:L0']['status'],'label_allowed')
 
     def test_rework_revokes_old_label_and_recomputes_origin_ratio(self):
-        self.normal();self.put('leaf','leaf-bad');self.put('garden','garden-bad')
+        self.normal();self.put('leaf','leaf-import-bad');self.put('garden','garden-import-bad')
         self.assertEqual(report(self.db)['decisions']['label:L0']['status'],'label_allowed')
-        self.put('blend','blend-bad')
+        self.put('blend','blend-import-bad')
         d=report(self.db)['decisions']
         self.assertEqual(d['rework:RW0']['status'],'applied')
         self.assertEqual(d['label:L0']['status'],'revoked_by_rework')
@@ -110,18 +110,18 @@ class TeaTests(unittest.TestCase):
 
     def test_cross_garden_ticket_and_conflicting_double_signed_weight(self):
         self.normal()
-        receipt=copy.deepcopy(fixture('leaf-ok')[4]);receipt.update(id='R-cross',pick_ticket='T1')
+        receipt=copy.deepcopy(fixture('leaf-import-ok')[4]);receipt.update(id='R-cross',pick_ticket='T1')
         ingest(self.db,'leaf',[receipt])
         self.assertEqual(report(self.db)['decisions']['receipt:R-cross']['status'],'duplicate_pick')
-        weight=copy.deepcopy(fixture('leaf-ok')[1]);weight.update(id='W1-again',net_kg=90,at='2026-11-10T11:00:00')
+        weight=copy.deepcopy(fixture('leaf-import-ok')[1]);weight.update(id='W1-again',net_kg=90,at='2026-11-10T11:00:00')
         ingest(self.db,'leaf',[weight]);d=report(self.db)['decisions']
         self.assertEqual(d['receipt:R1']['status'],'mass_dispute')
         self.assertEqual(d['blend:B0']['status'],'source_blocked')
 
     def test_overage_leaf_requires_rework_proof(self):
         self.normal()
-        receipt=copy.deepcopy(fixture('leaf-ok')[0]);receipt.update(id='R-age',pick_ticket='T-age',leaf_age_days=3)
-        weight=copy.deepcopy(fixture('leaf-ok')[1]);weight.update(id='W-age',receipt='R-age',net_kg=96)
+        receipt=copy.deepcopy(fixture('leaf-import-ok')[0]);receipt.update(id='R-age',pick_ticket='T-age',leaf_age_days=3)
+        weight=copy.deepcopy(fixture('leaf-import-ok')[1]);weight.update(id='W-age',receipt='R-age',net_kg=96)
         ingest(self.db,'leaf',[receipt,weight])
         blend={'kind':'blend','id':'B-age','at':'2026-11-10T21:00:00','receipts':['R-age'],'output_kg':90}
         ingest(self.db,'blend',[blend]);d=report(self.db)['decisions']

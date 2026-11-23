@@ -9,9 +9,9 @@ COMMANDS={'garden-import':'garden','leaf-import':'leaf','blend-import':'blend'}
 
 
 def main(argv=None):
-    p=argparse.ArgumentParser(prog='teatrace');sub=p.add_subparsers(dest='command',required=True)
+    p=argparse.ArgumentParser(prog='teablend');sub=p.add_subparsers(dest='command',required=True)
     for name in [*COMMANDS,'demo','report','audit','init']:
-        q=sub.add_parser(name);q.add_argument('--db',default='teatrace.sqlite')
+        q=sub.add_parser(name);q.add_argument('--db',default='teablend.sqlite')
         if name in COMMANDS:q.add_argument('--file',required=True)
     a=p.parse_args(argv)
     try:
@@ -20,8 +20,8 @@ def main(argv=None):
             result=ingest(c,COMMANDS[a.command],json.loads(Path(a.file).read_text(encoding='utf-8')))
         elif a.command=='demo':
             steps=[]
-            for system,name in [('garden','garden-ok.json'),('leaf','leaf-ok.json'),('blend','blend-ok.json'),
-                                ('garden','garden-bad.json'),('leaf','leaf-bad.json'),('blend','blend-bad.json')]:
+            for system,name in [('garden','garden-import-ok.json'),('leaf','leaf-import-ok.json'),('blend','blend-import-ok.json'),
+                                ('garden','garden-import-bad.json'),('leaf','leaf-import-bad.json'),('blend','blend-import-bad.json')]:
                 x=ingest(c,system,json.loads((ROOT/'fixtures'/name).read_text(encoding='utf-8')))
                 steps.append({'fixture':name,**x,'decisions':len(report(c)['decisions'])})
             result={'module':str(Path(__file__).resolve()),'steps':steps,'report':report(c),'audit':audit(c)}

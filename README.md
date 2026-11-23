@@ -4,8 +4,8 @@
 
 ```powershell
 python -m pip install . --no-deps --no-build-isolation
-python -m teatrace demo --db demo.sqlite
-python -m teatrace audit --db demo.sqlite
+python -m teablend demo --db demo.sqlite
+python -m teablend audit --db demo.sqlite
 python -m unittest discover -s tests -v
 ```
 

@@ -2,10 +2,36 @@
   "blend": "BL-1",
   "packed_at": "2026-11-25T10:00:00",
   "pouches": 100,
+  "pouch_codes": {"prefix": "PK-", "width": 2, "start": 1, "count": 100},
+  "sampling_design": {
+    "method": "random_probe",
+    "scope": "full_lot",
+    "sampled_count": 3,
+    "population": 100,
+    "ranges": ["PK-01", "PK-02", "PK-03"],
+    "untested_policy": "worst_observed_upper",
+    "uncovered_range_bound_pct": 20.9,
+    "note": "Three random pouches probed across the full 100-pouch case; untested pouches are held at the worst observed oxygen upper bound until individually retested."
+  },
   "headspace_samples": [
-    {"pouch": "PK-01", "oxygen_pct": 1.2, "instrument_error_pct": 0.2},
-    {"pouch": "PK-02", "oxygen_pct": 1.1, "instrument_error_pct": 0.2},
-    {"pouch": "PK-03", "oxygen_pct": 4.8, "instrument_error_pct": 0.2}
+    {
+      "pouch": "PK-01",
+      "oxygen_pct": 1.2,
+      "instrument_error_pct": 0.2,
+      "sampling_range": "PK-01 full headspace probe; random lot sample 1 of 3 drawn from PK-01..PK-100"
+    },
+    {
+      "pouch": "PK-02",
+      "oxygen_pct": 1.1,
+      "instrument_error_pct": 0.2,
+      "sampling_range": "PK-02 full headspace probe; random lot sample 2 of 3 drawn from PK-01..PK-100"
+    },
+    {
+      "pouch": "PK-03",
+      "oxygen_pct": 4.8,
+      "instrument_error_pct": 0.2,
+      "sampling_range": "PK-03 full headspace probe; random lot sample 3 of 3 drawn from PK-01..PK-100"
+    }
   ],
   "temperature_log": [
     {"start": "2026-11-25T10:00:00", "end": "2026-11-28T10:00:00", "celsius": 28}
@@ -14,6 +40,14 @@
     {"process": "as_packed", "max_oxygen_pct": 5.0, "max_days_at_28c": 3, "safe_months": 2},
     {"process": "nitrogen_repack", "max_oxygen_pct": 2.0, "max_days_at_28c": 3, "safe_months": 10}
   ],
+  "repack": {
+    "process": "nitrogen_repack",
+    "target_oxygen_upper_pct": 2.0,
+    "new_code_suffix": "-R",
+    "steps": ["unpacked", "nitrogen_filled", "resealed", "retested"],
+    "lot_wide_channel": "wholesale",
+    "lot_wide_requires": "all_100_pouches_closed"
+  },
   "channels": [
     {"id": "wholesale", "minimum_remaining_months": 6},
     {"id": "local", "minimum_remaining_months": 1}

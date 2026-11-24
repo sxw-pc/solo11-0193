@@ -1,5 +1,32 @@
 {
-  "plot": {"id": "G1-P1", "garden": "G1", "trap_counts": [12, 1], "adjacent_organic_garden": "G2", "distance_to_G2_metres": 18, "next_harvest_day": 20},
+  "plot": {
+    "id": "G1-P1",
+    "garden": "G1",
+    "trap_counts": [12, 1],
+    "adjacent_organic_garden": "G2",
+    "distance_to_G2_metres": 18,
+    "next_harvest_day": 20,
+    "traps": [
+      {
+        "id": "MT-001",
+        "x_metres": 12.0,
+        "y_metres": 8.0,
+        "count": 12,
+        "count_error_margin": 1,
+        "effective_work_days": 7,
+        "offline_intervals": [{"from_day": 3.0, "to_day": 3.5, "reason": "battery"}]
+      },
+      {
+        "id": "MT-002",
+        "x_metres": 30.0,
+        "y_metres": 20.0,
+        "count": 1,
+        "count_error_margin": 0,
+        "effective_work_days": 7,
+        "offline_intervals": []
+      }
+    ]
+  },
   "weather": [
     {"day": 0, "wind_toward_G2_mps": 5, "rain_expected": false},
     {"day": 1, "wind_toward_G2_mps": 1, "rain_expected": false}

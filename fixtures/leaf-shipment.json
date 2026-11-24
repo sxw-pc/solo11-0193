@@ -1,5 +1,19 @@
 {
-  "shipment": {"id": "SHIP-1", "parcels": ["BOX-1", "BOX-2"], "customer": "FACTORY-B", "minimum_celsius": 4, "maximum_celsius": 12, "partial_credit_allowed": true},
+  "shipment": {
+    "id": "SHIP-1",
+    "parcels": ["BOX-1", "BOX-2"],
+    "customer": "FACTORY-B",
+    "shipper": "TEA-FACTORY",
+    "carrier": "CARRIER-X",
+    "minimum_celsius": 4,
+    "maximum_celsius": 12,
+    "temp_max_gap_minutes": 45,
+    "partial_credit_allowed": true,
+    "delivery_deadline": "2026-11-25T18:00:00",
+    "recovery_hub": "HUB-2",
+    "default_claim_amount_cny": 800
+  },
+  "nodes": ["TEA-COLD-OUT", "HUB-2", "CUSTOMER_GATE"],
   "events": [
     {"id": "SCAN-1", "parcel": "BOX-1", "stage": "arrived", "at": "2026-11-25T10:00:00", "holder": "COURIER-A", "location": "CUSTOMER_GATE"},
     {"id": "SCAN-2", "parcel": "BOX-2", "stage": "transfer", "at": "2026-11-25T09:30:00", "holder": "COURIER-B", "location": "HUB-2"}

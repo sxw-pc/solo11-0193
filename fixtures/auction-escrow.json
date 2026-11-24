@@ -1,0 +1,12 @@
+{
+  "lot": {"id": "TEA-LOT-1", "kg": 100, "reserve_price": 10000, "seller": "COOP-1"},
+  "bids": [
+    {"id": "BID-A", "lot": "TEA-LOT-1", "buyer": "BUYER-A", "amount": 12000, "submitted_minute": 540},
+    {"id": "BID-B", "lot": "TEA-LOT-1", "buyer": "BUYER-B", "amount": 11000, "submitted_minute": 545}
+  ],
+  "payment": {"buyer": "BUYER-A", "authorized": 12000, "captured": 4000, "refunded": 0},
+  "deliveries": [
+    {"id": "DEL-1", "kg": 30, "buyer_signature": true, "seller_signature": true}
+  ],
+  "escrow_terms": {"staged_release_allowed": true, "final_release_allowed": true, "platform_fee_pct": 5}
+}

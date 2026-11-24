@@ -1,7 +1,239 @@
 {
-  "stock": {"L1":10},
+  "schema": "offline-fulfillment-merge/v1",
+  "stock": {"L1": 10},
   "branches": [
-    {"branch":"A","snapshot":{"L1":10},"order":{"id":"O1","label":"L1","kg":8}},
-    {"branch":"B","snapshot":{"L1":10},"order":{"id":"O2","label":"L1","kg":5}}
-  ]
+    {"branch": "A", "snapshot": {"L1": 10}, "order": {"id": "O1", "label": "L1", "kg": 8}},
+    {"branch": "B", "snapshot": {"L1": 10}, "order": {"id": "O2", "label": "L1", "kg": 5}}
+  ],
+  "meta": {
+    "narrative": "两店断网各凭本地快照10签署O1=8/O2=5，总仓L1实物仅10，承诺13>10。",
+    "currency": "CNY",
+    "simulated_signatures_only": true
+  },
+  "label_contracts": {
+    "L1": {
+      "label": "L1",
+      "grade": "premium",
+      "organic": true,
+      "origin": null,
+      "substitutes_allowed": true,
+      "quality_inspection_required": true,
+      "note": "L1为已贴标批次；等级premium与有机承诺是硬约束，替代补货也必须通过teablend.blend标签资格。"
+    }
+  },
+  "boxes": [
+    {"code": "WH-L1-01", "location": "WH", "label": "L1", "kg": 6, "tare_kg": 0.2, "version": 7, "sealed": true, "weighed_at": "2026-11-22T15:00:00", "scale_ticket": "W-WH-01"},
+    {"code": "WH-L1-02", "location": "WH", "label": "L1", "kg": 4, "tare_kg": 0.15, "version": 7, "sealed": true, "weighed_at": "2026-11-22T15:02:00", "scale_ticket": "W-WH-02"}
+  ],
+  "orders": [
+    {
+      "id": "O2",
+      "kind": "order_signed",
+      "branch": "B",
+      "customer": "林晚（B店客户）",
+      "label": "L1",
+      "kg": 5,
+      "signed_at": "2026-11-23T17:40:00",
+      "signature": "B-STORE-SIGNED-O2-7F31",
+      "contract": {"label": "L1", "grade": "premium", "organic": true, "substitutes_allowed": true},
+      "substitution_clause": "客户允许同标签、同等级、同有机承诺的合格替代批次抵缺口",
+      "notice_id": "N-O2-LOCAL",
+      "paper_receipt": "B-OFFLINE-BOOK-042"
+    },
+    {
+      "id": "O1",
+      "kind": "order_signed",
+      "branch": "A",
+      "customer": "陈一（A店客户）",
+      "label": "L1",
+      "kg": 8,
+      "signed_at": "2026-11-23T18:05:00",
+      "signature": "A-STORE-SIGNED-O1-2C9A",
+      "contract": {"label": "L1", "grade": "premium", "organic": true, "substitutes_allowed": true},
+      "substitution_clause": "客户允许同标签、同等级、同有机承诺的合格替代批次抵缺口",
+      "notice_id": "N-O1-LOCAL",
+      "paper_receipt": "A-OFFLINE-BOOK-117"
+    }
+  ],
+  "notices": [
+    {
+      "id": "N-O1-LOCAL",
+      "order_id": "O1",
+      "branch": "A",
+      "version": 1,
+      "kind": "local_acceptance",
+      "at": "2026-11-23T18:05:01",
+      "title": "接单成功",
+      "accepted": true,
+      "body": "A店断网，本地快照L1=10，显示O1接单成功8千克。该显示不是总仓可兑现承诺。"
+    },
+    {
+      "id": "N-O2-LOCAL",
+      "order_id": "O2",
+      "branch": "B",
+      "version": 1,
+      "kind": "local_acceptance",
+      "at": "2026-11-23T17:40:01",
+      "title": "接单成功",
+      "accepted": true,
+      "body": "B店断网，本地快照L1=10，显示O2接单成功5千克。该显示不是总仓可兑现承诺。"
+    }
+  ],
+  "replenishments": [
+    {
+      "id": "RP-L1-03",
+      "kind": "replenishment",
+      "label": "L1",
+      "kg": 3,
+      "grade": "premium",
+      "organic": true,
+      "origin": "G1",
+      "source_site": "SITE-C（邻仓）",
+      "quality_inspected": true,
+      "inspection": {"id": "QI-C-0309", "passed": true, "inspector": "质检周", "at": "2026-11-23T16:00:00"},
+      "quality_report": "水分/粉末/农残复检合格，同L1标签合同适用",
+      "boxes": [{"code": "WH-L1-R3", "kg": 3, "version": 1}],
+      "dispatched_at": "2026-11-24T06:30:00",
+      "logistics": "TRUCK-C-7781",
+      "received_at": null
+    },
+    {
+      "id": "RP-BAD-ORG-03",
+      "kind": "replenishment",
+      "label": "L1",
+      "kg": 3,
+      "grade": "premium",
+      "organic": false,
+      "origin": "G2",
+      "quality_inspected": true,
+      "inspection": {"id": "QI-C-0310", "passed": true},
+      "boxes": [{"code": "WH-L1-BADORG", "kg": 3, "version": 1}],
+      "dispatched_at": "2026-11-24T07:00:00",
+      "note": "非有机批次：有机承诺硬约束必须阻断它抵O1/O2缺口"
+    },
+    {
+      "id": "RP-BAD-GRADE-03",
+      "kind": "replenishment",
+      "label": "L1",
+      "kg": 3,
+      "grade": "standard",
+      "organic": true,
+      "origin": "G1",
+      "quality_inspected": true,
+      "boxes": [{"code": "WH-L1-BADGRADE", "kg": 3, "version": 1}],
+      "note": "等级standard：premium等级硬约束必须阻断"
+    }
+  ],
+  "inbound_receipts": [],
+  "replenishment_withdrawals": [],
+  "revocation_consents": [],
+  "returns": [],
+  "outbound_scans": [],
+  "scenarios": {
+    "replenishment": {
+      "inbound_receipts": [
+        {
+          "id": "IB-L1-R3",
+          "kind": "inbound_receipt",
+          "replenishment": "RP-L1-03",
+          "boxes": ["WH-L1-R3"],
+          "location": "WH",
+          "at": "2026-11-24T09:10:00",
+          "received_by": "总仓收货 孙仓管",
+          "signature": "WH-KEEPER-SIGNED-IB-R3",
+          "scan_id": "IN-SCAN-R3-0001",
+          "note": "3千克调入茶到仓签收并完成入库扫描，此刻才抵缺口"
+        }
+      ]
+    },
+    "consent_needed": {
+      "replenishment_withdrawals": [
+        {
+          "id": "WD-RP-L1-03",
+          "kind": "replenishment_withdrawal",
+          "replenishment": "RP-L1-03",
+          "at": "2026-11-24T08:30:00",
+          "signature": "SITE-C-DISPATCH-WD-552",
+          "reason": "邻仓该批改拨其他客户，调入未成立"
+        }
+      ],
+      "inbound_receipts": [
+        {
+          "id": "IB-BADORG",
+          "kind": "inbound_receipt",
+          "replenishment": "RP-BAD-ORG-03",
+          "boxes": ["WH-L1-BADORG"],
+          "location": "WH",
+          "at": "2026-11-24T09:05:00",
+          "received_by": "总仓收货 孙仓管",
+          "signature": "WH-KEEPER-SIGNED-IB-BADORG",
+          "scan_id": "IN-SCAN-BADORG-0001"
+        }
+      ]
+    },
+    "revocation": {
+      "replenishment_withdrawals": [
+        {
+          "id": "WD-RP-L1-03",
+          "kind": "replenishment_withdrawal",
+          "replenishment": "RP-L1-03",
+          "at": "2026-11-24T08:30:00",
+          "signature": "SITE-C-DISPATCH-WD-552",
+          "reason": "合格调入未成立"
+        }
+      ],
+      "inbound_receipts": [
+        {
+          "id": "IB-BADORG",
+          "kind": "inbound_receipt",
+          "replenishment": "RP-BAD-ORG-03",
+          "boxes": ["WH-L1-BADORG"],
+          "location": "WH",
+          "at": "2026-11-24T09:05:00",
+          "received_by": "总仓收货 孙仓管",
+          "signature": "WH-KEEPER-SIGNED-IB-BADORG",
+          "scan_id": "IN-SCAN-BADORG-0001"
+        }
+      ],
+      "revocation_consents": [
+        {
+          "id": "RC-O2",
+          "kind": "revocation_consent",
+          "order": "O2",
+          "customer": "林晚（B店客户）",
+          "accepted": true,
+          "written": true,
+          "signed_at": "2026-11-24T09:40:00",
+          "customer_sign": "B-CUSTOMER-WRITTEN-SIGN-RC-O2",
+          "id_document_last4": "2046",
+          "compensation": {"refund": "全额退还O2货款", "money": 200, "currency": "CNY", "note": "另付延迟/缺货补偿金200元并寄送致歉茶样"}
+        }
+      ]
+    },
+    "late_return": {
+      "returns": [
+        {
+          "id": "RT-LATE-L1-01",
+          "kind": "return",
+          "order": "O0-PRIOR",
+          "label": "L1",
+          "kg": 1,
+          "box": "WH-L1-RT1",
+          "location": "WH",
+          "at": "2026-11-24T11:20:00",
+          "received_by": "总仓收货 孙仓管",
+          "signature": "WH-KEEPER-SIGNED-RT1",
+          "scan_id": "RETURN-SCAN-0001",
+          "reason": "早间另一笔已出库老订单的客户退货，断线恢复后才到仓"
+        }
+      ]
+    },
+    "outbound_replay": {
+      "outbound_scans": [
+        {"id": "OS-O1-01", "kind": "outbound_scan", "order": "O1", "box": "WH-L1-01", "kg": 6, "at": "2026-11-24T14:00:00", "scan_id": "OUT-0001"},
+        {"id": "OS-O1-02", "kind": "outbound_scan", "order": "O1", "box": "WH-L1-02", "kg": 2, "at": "2026-11-24T14:01:00", "scan_id": "OUT-0002"},
+        {"id": "OS-O1-01", "kind": "outbound_scan", "order": "O1", "box": "WH-L1-01", "kg": 6, "at": "2026-11-24T14:00:00", "scan_id": "OUT-0001", "note": "断线扫描重复上传"}
+      ]
+    }
+  }
 }

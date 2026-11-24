@@ -1,0 +1,7 @@
+{
+  "stock": {"L1":10},
+  "branches": [
+    {"branch":"A","snapshot":{"L1":10},"order":{"id":"O1","label":"L1","kg":8}},
+    {"branch":"B","snapshot":{"L1":10},"order":{"id":"O2","label":"L1","kg":5}}
+  ]
+}

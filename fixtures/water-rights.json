@@ -1,0 +1,9 @@
+{
+  "river_permit": {"id": "RIVER-1", "daily_limit_litres": 1200, "recorded_litres": 0, "ecological_min_flow_lps": 50},
+  "plots": [
+    {"id": "G1-P1", "garden": "G1", "need_litres": 800, "soil_salt_limit_mg_per_litre": 500, "latest_irrigation_day": 1},
+    {"id": "G2-P1", "garden": "G2", "need_litres": 800, "soil_salt_limit_mg_per_litre": 500, "latest_irrigation_day": 1}
+  ],
+  "reclaimed_water": {"available_litres": 1000, "salt_mg_per_litre": 300, "signed_quality_sample": true},
+  "forecast": [{"day": 1, "rain_litres_equivalent": 600, "confidence": "provisional"}]
+}

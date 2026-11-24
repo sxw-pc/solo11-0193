@@ -1,0 +1,11 @@
+{
+  "plot": {"id": "G1-P1", "garden": "G1", "trap_counts": [12, 1], "adjacent_organic_garden": "G2", "distance_to_G2_metres": 18, "next_harvest_day": 20},
+  "weather": [
+    {"day": 0, "wind_toward_G2_mps": 5, "rain_expected": false},
+    {"day": 1, "wind_toward_G2_mps": 1, "rain_expected": false}
+  ],
+  "treatments": {
+    "pheromone_traps": {"available": true, "units": 20, "followup_days": 3},
+    "approved_spray": {"available": true, "wind_limit_mps": 2, "organic_buffer_metres": 15, "preharvest_days": 14}
+  }
+}

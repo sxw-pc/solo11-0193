@@ -1,0 +1,10 @@
+{
+  "receipt_id": "R1",
+  "signed_net_kg": 100,
+  "readings": [
+    {"id":"M1","depth":"surface","moisture_pct":20},
+    {"id":"M2","depth":"surface","moisture_pct":20}
+  ],
+  "load_layers": ["surface", "core"],
+  "drying_output_kg": 65
+}

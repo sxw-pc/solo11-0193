@@ -1,15 +1,238 @@
 {
-  "grid_meter": {"id": "GRID-1", "rollover_kwh": 10000, "calibration_error_kwh": 1},
+  "invoice_id": "UTIL-2026-09-24-0911",
+  "currency": "CNY",
+  "grid_meter": {
+    "id": "GRID-1",
+    "dial_max_kwh": 10000,
+    "rollover_kwh": 10000,
+    "calibration_error_kwh": 1,
+    "owner": "tea-factory",
+    "signed_by": "设备主管",
+    "signature": "SIG-METER-CARD"
+  },
   "readings": [
-    {"id": "R1", "at_minute": 540, "register_kwh": 9990},
-    {"id": "R-MID", "at_minute": 600, "register_kwh": 16},
-    {"id": "R2", "at_minute": 660, "register_kwh": 30}
+    {
+      "id": "R1",
+      "at_minute": 540,
+      "meter_id": "GRID-1",
+      "epoch": 0,
+      "register_kwh": 9990,
+      "signed_by": "值班抄表员",
+      "signature": "SIG-R1"
+    },
+    {
+      "id": "R-MID",
+      "at_minute": 600,
+      "meter_id": "GRID-1",
+      "epoch": 0,
+      "register_kwh": 16,
+      "signed_by": "值班抄表员",
+      "signature": "SIG-R-MID"
+    },
+    {
+      "id": "R2",
+      "at_minute": 660,
+      "meter_id": "GRID-1",
+      "epoch": 0,
+      "register_kwh": 30,
+      "signed_by": "值班抄表员",
+      "signature": "SIG-R2"
+    }
+  ],
+  "meter_events": [
+    {
+      "id": "EV-ROLLOVER-540-600",
+      "kind": "rollover",
+      "meter_id": "GRID-1",
+      "start_minute": 540,
+      "end_minute": 600,
+      "after_reading_id": "R1",
+      "count": 1,
+      "signed_by": "值班抄表员",
+      "signature": "SIG-ROLLOVER"
+    }
   ],
   "jobs": [
-    {"id": "BATCH-A", "start_minute": 540, "end_minute": 600, "nominal_weight": 60, "submeter_kwh": 22},
-    {"id": "BATCH-B", "start_minute": 600, "end_minute": 660, "nominal_weight": 40, "submeter_kwh": 14}
+    {
+      "id": "BATCH-A",
+      "line_id": "LINE-A",
+      "start_minute": 540,
+      "end_minute": 600,
+      "nominal_weight": 60,
+      "submeter_id": "SUB-A",
+      "submeter_kwh": 22,
+      "signed_by": "车间统计",
+      "signature": "SIG-SUB-A"
+    },
+    {
+      "id": "BATCH-B",
+      "line_id": "LINE-B",
+      "start_minute": 600,
+      "end_minute": 660,
+      "nominal_weight": 40,
+      "submeter_id": "SUB-B",
+      "submeter_kwh": 14,
+      "signed_by": "车间统计",
+      "signature": "SIG-SUB-B"
+    }
   ],
-  "tariff": [{"start_minute": 540, "end_minute": 600, "yuan_per_kwh": 2}, {"start_minute": 600, "end_minute": 660, "yuan_per_kwh": 1}],
+  "submeter_readings": [
+    {
+      "id": "SUB-A-540-600",
+      "submeter_id": "SUB-A",
+      "batch_id": "BATCH-A",
+      "start_minute": 540,
+      "end_minute": 600,
+      "kwh": 22,
+      "signed_by": "车间统计",
+      "signature": "SIG-SUB-A-PERIOD"
+    },
+    {
+      "id": "SUB-B-600-660",
+      "submeter_id": "SUB-B",
+      "batch_id": "BATCH-B",
+      "start_minute": 600,
+      "end_minute": 660,
+      "kwh": 14,
+      "signed_by": "车间统计",
+      "signature": "SIG-SUB-B-PERIOD"
+    }
+  ],
+  "tariff": [
+    {
+      "id": "T-HIGH",
+      "start_minute": 540,
+      "end_minute": 600,
+      "yuan_per_kwh": 2,
+      "signed_by": "电力公司",
+      "signature": "SIG-TARIFF-HIGH"
+    },
+    {
+      "id": "T-LOW",
+      "start_minute": 600,
+      "end_minute": 660,
+      "yuan_per_kwh": 1,
+      "signed_by": "电力公司",
+      "signature": "SIG-TARIFF-LOW"
+    }
+  ],
+  "utility_invoice": {
+    "id": "UTIL-2026-09-24-0911",
+    "amount_yuan": 66,
+    "status": "received",
+    "signed_by": "财务",
+    "signature": "SIG-INVOICE-66"
+  },
   "utility_invoice_yuan": 66,
-  "loss_allocation_contract": {"plant_overhead_allowed": true, "batch_proportional_allowed": true}
+  "loss_allocation_contract": {
+    "id": "CONTRACT-ENERGY-LOSS-2026",
+    "plant_overhead_allowed": true,
+    "actual_run_allocation_allowed": true,
+    "batch_proportional_allowed": true,
+    "signed_by": "厂长与财务",
+    "signature": "SIG-ENERGY-CONTRACT",
+    "plant_account": "PLANT"
+  },
+  "runtime_records": [
+    {
+      "id": "RUN-540-600-A-ONLY",
+      "start_minute": 540,
+      "end_minute": 600,
+      "active_lines": [
+        {"line_id": "LINE-A", "batch_id": "BATCH-A"}
+      ],
+      "evidence": "equipment-start-stop-log",
+      "signed_by": "设备主管",
+      "signature": "SIG-RUN-A-ONLY"
+    },
+    {
+      "id": "RUN-600-660-B-ONLY",
+      "start_minute": 600,
+      "end_minute": 660,
+      "active_lines": [
+        {"line_id": "LINE-B", "batch_id": "BATCH-B"}
+      ],
+      "evidence": "equipment-start-stop-log",
+      "signed_by": "设备主管",
+      "signature": "SIG-RUN-B-ONLY"
+    }
+  ],
+  "late_calibration_example": {
+    "id": "CAL-LATE-001",
+    "reading_id": "R2",
+    "correction_register_kwh": 31,
+    "correction_delta_kwh": 1,
+    "reason": "late_meter_calibration",
+    "work_order_id": "CAL-WO-001",
+    "responsible_party": "calibration_laboratory",
+    "utility_adjustment_yuan": 1,
+    "signed_by": "计量院校准工程师",
+    "signature": "SIG-CAL-001"
+  },
+  "late_replacement_example": {
+    "id": "WO-METER-LATE-002",
+    "kind": "replacement",
+    "at_minute": 630,
+    "start_minute": 600,
+    "end_minute": 660,
+    "old_meter_id": "GRID-1",
+    "new_meter_id": "GRID-2",
+    "additional_readings": [
+      {
+        "id": "R-OLD-FINAL-630",
+        "at_minute": 630,
+        "sequence": 0,
+        "meter_id": "GRID-1",
+        "epoch": 0,
+        "register_kwh": 24,
+        "signed_by": "换表工单",
+        "signature": "SIG-OLD-FINAL"
+      },
+      {
+        "id": "R-NEW-INIT-630",
+        "at_minute": 630,
+        "sequence": 1,
+        "meter_id": "GRID-2",
+        "epoch": 0,
+        "register_kwh": 10,
+        "signed_by": "换表工单",
+        "signature": "SIG-NEW-INIT"
+      },
+      {
+        "id": "R2",
+        "at_minute": 660,
+        "meter_id": "GRID-2",
+        "epoch": 0,
+        "register_kwh": 30,
+        "signed_by": "值班抄表员",
+        "signature": "SIG-R2-NEW-METER"
+      }
+    ],
+    "meter_event": {
+      "id": "EV-REPLACEMENT-630",
+      "kind": "replacement",
+      "meter_id": "GRID-1",
+      "at_minute": 630,
+      "old_meter_id": "GRID-1",
+      "new_meter_id": "GRID-2",
+      "work_order_id": "WO-METER-LATE-002",
+      "signed_by": "设备主管",
+      "signature": "SIG-REPLACEMENT"
+    },
+    "revised_invoice_yuan": 80,
+    "utility_adjustment_yuan": 14,
+    "responsible_party": "meter_maintenance"
+  },
+  "late_third_line_example": {
+    "id": "RUN-540-600-LATE-LINE-C",
+    "start_minute": 540,
+    "end_minute": 600,
+    "active_lines": [
+      {"line_id": "LINE-A", "batch_id": "BATCH-A"},
+      {"line_id": "LINE-C"}
+    ],
+    "evidence": "late-plc-log",
+    "signed_by": "设备主管",
+    "signature": "SIG-RUN-LATE-C"
+  }
 }

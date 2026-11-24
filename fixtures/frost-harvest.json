@@ -1,0 +1,14 @@
+{
+  "plots": [
+    {"id": "P1", "garden": "G1", "ready_at": "2026-11-25T05:00:00", "finish_at": "2026-11-25T07:00:00", "kg": 80, "grade": "premium"},
+    {"id": "P2", "garden": "G2", "ready_at": "2026-11-25T05:30:00", "finish_at": "2026-11-25T07:30:00", "kg": 40, "grade": "premium"}
+  ],
+  "crews": [
+    {"id": "C1", "gardens": ["G1", "G2"], "travel_minutes": {"G1:G2": 50}},
+    {"id": "C2", "gardens": ["G1", "G2"], "travel_minutes": {"G1:G2": 45}}
+  ],
+  "forecasts": [
+    {"garden": "G1", "frost_at": "2026-11-25T07:20:00"},
+    {"garden": "G2", "frost_at": "2026-11-25T07:45:00"}
+  ]
+}

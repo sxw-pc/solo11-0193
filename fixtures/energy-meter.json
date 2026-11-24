@@ -2,6 +2,7 @@
   "grid_meter": {"id": "GRID-1", "rollover_kwh": 10000, "calibration_error_kwh": 1},
   "readings": [
     {"id": "R1", "at_minute": 540, "register_kwh": 9990},
+    {"id": "R-MID", "at_minute": 600, "register_kwh": 16},
     {"id": "R2", "at_minute": 660, "register_kwh": 30}
   ],
   "jobs": [
@@ -9,5 +10,6 @@
     {"id": "BATCH-B", "start_minute": 600, "end_minute": 660, "nominal_weight": 40, "submeter_kwh": 14}
   ],
   "tariff": [{"start_minute": 540, "end_minute": 600, "yuan_per_kwh": 2}, {"start_minute": 600, "end_minute": 660, "yuan_per_kwh": 1}],
+  "utility_invoice_yuan": 66,
   "loss_allocation_contract": {"plant_overhead_allowed": true, "batch_proportional_allowed": true}
 }

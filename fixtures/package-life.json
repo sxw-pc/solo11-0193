@@ -1,0 +1,17 @@
+{
+  "blend": "BL-1",
+  "packed_at": "2026-11-25T10:00:00",
+  "pouches": 100,
+  "headspace_samples": [
+    {"pouch": "PK-01", "oxygen_pct": 1.2, "instrument_error_pct": 0.2},
+    {"pouch": "PK-02", "oxygen_pct": 1.1, "instrument_error_pct": 0.2},
+    {"pouch": "PK-03", "oxygen_pct": 4.8, "instrument_error_pct": 0.2}
+  ],
+  "temperature_log": [
+    {"start": "2026-11-25T10:00:00", "end": "2026-11-28T10:00:00", "celsius": 28}
+  ],
+  "channels": [
+    {"id": "wholesale", "minimum_remaining_months": 6},
+    {"id": "local", "minimum_remaining_months": 1}
+  ]
+}

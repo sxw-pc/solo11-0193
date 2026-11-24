@@ -5,8 +5,12 @@
     {"id": "BID-B", "lot": "TEA-LOT-1", "buyer": "BUYER-B", "amount": 11000, "submitted_minute": 545}
   ],
   "payment": {"buyer": "BUYER-A", "authorized": 12000, "captured": 4000, "refunded": 0},
+  "bank_events": [
+    {"txn_id": "BANK-AUTH-1", "type": "authorization", "lot": "TEA-LOT-1", "buyer": "BUYER-A", "amount": 12000, "at": "2026-11-20T09:00:00"},
+    {"txn_id": "BANK-CAP-1", "type": "capture", "lot": "TEA-LOT-1", "buyer": "BUYER-A", "amount": 4000, "at": "2026-11-20T09:05:00"}
+  ],
   "deliveries": [
-    {"id": "DEL-1", "kg": 30, "buyer_signature": true, "seller_signature": true}
+    {"id": "DEL-1", "kg": 30, "buyer_signature": true, "seller_signature": true, "at": "2026-11-21T10:00:00"}
   ],
   "escrow_terms": {"staged_release_allowed": true, "final_release_allowed": true, "platform_fee_pct": 5}
 }

@@ -1,0 +1,11 @@
+{
+  "shipment": {"id": "SHIP-1", "parcels": ["BOX-1", "BOX-2"], "customer": "FACTORY-B", "minimum_celsius": 4, "maximum_celsius": 12, "partial_credit_allowed": true},
+  "events": [
+    {"id": "SCAN-1", "parcel": "BOX-1", "stage": "arrived", "at": "2026-11-25T10:00:00", "holder": "COURIER-A", "location": "CUSTOMER_GATE"},
+    {"id": "SCAN-2", "parcel": "BOX-2", "stage": "transfer", "at": "2026-11-25T09:30:00", "holder": "COURIER-B", "location": "HUB-2"}
+  ],
+  "temperature": [
+    {"parcel": "BOX-1", "min_celsius": 6, "max_celsius": 9},
+    {"parcel": "BOX-2", "min_celsius": 5, "max_celsius": 11}
+  ]
+}

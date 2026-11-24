@@ -1,14 +1,38 @@
 {
+  "day": "2026-11-25",
+  "order": {"premium_kg": 80, "due_at": "2026-11-25T20:00:00"},
+  "context": {
+    "order_kg": 80,
+    "sanitation_minutes": 15,
+    "same_garden_sanitation_minutes": 10,
+    "cover_minutes": 45,
+    "variety": "Longjing",
+    "cover_materials": {
+      "G1": {"sets": 2, "frost_rating_ok": true},
+      "G2": {"sets": 2, "frost_rating_ok": true}
+    }
+  },
   "plots": [
-    {"id": "P1", "garden": "G1", "ready_at": "2026-11-25T05:00:00", "finish_at": "2026-11-25T07:00:00", "kg": 80, "grade": "premium"},
-    {"id": "P2", "garden": "G2", "ready_at": "2026-11-25T05:30:00", "finish_at": "2026-11-25T07:30:00", "kg": 40, "grade": "premium"}
+    {"id": "P1", "garden": "G1", "ready_at": "2026-11-25T05:00:00", "finish_at": "2026-11-25T07:00:00", "kg": 80, "grade": "premium", "variety": "Longjing"},
+    {"id": "P2", "garden": "G2", "ready_at": "2026-11-25T05:30:00", "finish_at": "2026-11-25T07:30:00", "kg": 40, "grade": "premium", "variety": "Longjing"}
   ],
   "crews": [
-    {"id": "C1", "gardens": ["G1", "G2"], "travel_minutes": {"G1:G2": 50}},
-    {"id": "C2", "gardens": ["G1", "G2"], "travel_minutes": {"G1:G2": 45}}
+    {"id": "C1", "gardens": ["G1", "G2"], "travel_minutes": {"G1:G2": 50}, "pickers": {"G1": "PK-C1-G1", "G2": "PK-C1-G2"}},
+    {"id": "C2", "gardens": ["G1", "G2"], "travel_minutes": {"G1:G2": 45}, "pickers": {"G1": "PK-C2-G1", "G2": "PK-C2-G2"}}
   ],
   "forecasts": [
-    {"garden": "G1", "frost_at": "2026-11-25T07:20:00"},
-    {"garden": "G2", "frost_at": "2026-11-25T07:45:00"}
+    {"id": "F-G1-MET", "source": "met-bureau", "garden": "G1", "frost_at": "2026-11-25T07:20:00", "status": "credible", "trusted": true},
+    {"id": "F-G1-LATE", "source": "field-station", "garden": "G1", "frost_at": "2026-11-25T07:50:00", "status": "credible", "trusted": true},
+    {"id": "F-G2-MET", "source": "met-bureau", "garden": "G2", "frost_at": "2026-11-25T07:45:00", "status": "credible", "trusted": true},
+    {"id": "F-G2-OPTIMISTIC", "source": "vendor-model", "garden": "G2", "frost_at": "2026-11-25T08:05:00", "status": "credible", "trusted": true},
+    {"id": "F-G2-NOISY", "source": "crowdsourced", "garden": "G2", "frost_at": "2026-11-25T07:10:00", "status": "unverified", "trusted": false}
+  ],
+  "garden_events": [
+    {"id": "CERT-G1-V1", "kind": "certificate", "at": "2026-11-01T00:00:00", "garden": "G1", "variety": "Longjing", "version": 1, "start": "2026-11-01T00:00:00", "finish": "2026-12-01T00:00:00", "organic": true, "status": "active"},
+    {"id": "CERT-G2-V1", "kind": "certificate", "at": "2026-11-01T00:00:01", "garden": "G2", "variety": "Longjing", "version": 1, "start": "2026-11-01T00:00:00", "finish": "2026-12-01T00:00:00", "organic": false, "status": "active"},
+    {"id": "PK-C1-G1", "kind": "picker", "at": "2026-11-01T00:01:00", "garden": "G1", "start": "2026-11-01T00:00:00", "finish": "2026-12-01T00:00:00", "status": "active"},
+    {"id": "PK-C1-G2", "kind": "picker", "at": "2026-11-01T00:01:01", "garden": "G2", "start": "2026-11-01T00:00:00", "finish": "2026-12-01T00:00:00", "status": "active"},
+    {"id": "PK-C2-G1", "kind": "picker", "at": "2026-11-01T00:01:02", "garden": "G1", "start": "2026-11-01T00:00:00", "finish": "2026-12-01T00:00:00", "status": "active"},
+    {"id": "PK-C2-G2", "kind": "picker", "at": "2026-11-01T00:01:03", "garden": "G2", "start": "2026-11-01T00:00:00", "finish": "2026-12-01T00:00:00", "status": "active"}
   ]
 }
